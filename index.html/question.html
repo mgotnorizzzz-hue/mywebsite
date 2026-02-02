@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>The Question 💖</title>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Special+Elite&display=swap" rel="stylesheet">
+
+<style>
+body{
+  margin:0;
+  height:100vh;
+  background:#f4ecd8;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:'Special Elite', cursive;
+  overflow:hidden;
+}
+
+.paper{
+  width:75%;
+  max-width:900px;
+  background:#fffaf0;
+  padding:60px;
+  box-shadow:0 25px 60px rgba(0,0,0,.25);
+  text-align:center;
+}
+
+h1{
+  font-family:'Playfair Display', serif;
+  font-size:42px;
+  color:#4b2e2e;
+}
+
+.buttons{
+  margin-top:40px;
+  display:flex;
+  gap:30px;
+  justify-content:center;
+}
+
+button{
+  padding:14px 38px;
+  border:none;
+  border-radius:40px;
+  font-size:18px;
+  cursor:pointer;
+}
+
+#yes{
+  background:#8b0000;
+  color:white;
+}
+
+#no{
+  background:#ddd;
+}
+</style>
+</head>
+
+<body>
+
+<div class="paper">
+  <h1>Will you be my Valentine? 💘</h1>
+
+  <div class="buttons">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 🙈</button>
+  </div>
+</div>
+
+<audio id="pop">
+  <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_6f3d9a35f6.mp3">
+</audio>
+
+<script>
+const yes = document.getElementById("yes");
+const no = document.getElementById("no");
+const pop = document.getElementById("pop");
+
+let escaped = false;
+
+no.addEventListener("click", () => {
+  if (!escaped) {
+    no.style.position = "fixed";
+    escaped = true;
+  }
+  no.style.left = Math.random() * (window.innerWidth - 120) + "px";
+  no.style.top = Math.random() * (window.innerHeight - 80) + "px";
+});
+
+yes.addEventListener("click", () => {
+  pop.play();
+
+  confetti({
+    particleCount: 180,
+    spread: 110,
+    origin: { y: 0.6 }
+  });
+
+  setTimeout(() => {
+    window.location.href = "yes.html";
+  }, 1200);
+});
+</script>
+
+</body>
+</html>
